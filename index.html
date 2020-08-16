@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Password Generator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <h1 class="title">Password Generator</h1>
+        <div class="gen">
+            <h2>Generate a Password</h2>
+            
+            <div class="genContent">
+                <p id="passwordField">Your Secure Password</p>
+            </div>
+            <br />
+            <button onclick="passwordGen()" class="genButton" type="button">Generate</button>
+            <script>
+                function passwordGen(){
+                    var letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    var symbols = "!@#$%^&*()_+~`|}{[]\:;?><,./-=";
+                    var numbers = "1234567890";
+                    var password = "";
+                    var whichOne, whichOne1;
+                    var letOnly = false;
+                        numOnly = false;
+                        symOnly = false;
+                        letNum = false;
+                        letSym = false;
+                        numSym = false;
+                        letNumSym = false;
+
+                    var desiredLength = prompt("Welcome to the password generator! How long would you like this password to be (8-128 characters)?");
+                    console.log(desiredLength);
+                    var letterInput = confirm("Would you like letters included?");
+                    console.log("letters?: " + letterInput);
+                    var numberInput = confirm("Would you like numbers included?");
+                    console.log("numbers?: " + numberInput);
+                    var symbolInput = confirm("Would you like symbols included?");
+                    console.log("symbols?: " + symbolInput);
+
+                    if ((letterInput == true) && (numberInput == true) && (symbolInput == true)){
+                        letNumSym = true;
+                    }
+                    else if ((letterInput == true) && (numberInput == true) && (symbolInput == false)){
+                        letNum = true;
+                    }
+                    else if ((letterInput == true) && (numberInput == false) && (symbolInput == true)){
+                        letSym = true;
+                    }
+                    else if ((letterInput == false) && (numberInput == true) && (symbolInput == true)){
+                        numSym = true;
+                    }
+                    else if ((letterInput == false) && (numberInput == true) && (symbolInput == false)){
+                        numOnly = true;
+                    }
+                    else if ((letterInput == false) && (numberInput == false) && (symbolInput == true)){
+                        symOnly = true;
+                    }
+                    else if ((letterInput == true) && (numberInput == false) && (symbolInput == false)){
+                        letOnly = true;
+                    }
+                    
+                    if (letNumSym == true){
+                        for (var i=0; i<parseInt(desiredLength); i++){
+                            var whichOne1 = Math.floor(Math.random() * (3-0) + 0);
+                            if (whichOne1 == 1){
+                                var randomNumber = numbers.charAt(Math.floor(Math.random() * (numbers.length-1) + 1));
+                                password += randomNumber;
+                                console.log(randomNumber);
+                            }
+                            else if (whichOne1 == 2){
+                                var randomSymbol = symbols.charAt(Math.floor(Math.random() * (symbols.length-1) + 1));
+                                password += randomSymbol;
+                                console.log(randomSymbol);
+                            }
+                            else if (whichOne1 == 3){
+                                var randomLetter = letters.charAt(Math.floor(Math.random() * (letters.length-1) + 1));
+                                password += randomLetter;
+                                console.log(randomLetter);
+                            }
+                        }
+                    }                   
+                    //LETTERS ONLY                            
+                    else if (letOnly == true){
+                        for (var i=0; i<desiredLength; i++){
+                            var randomLetter = letters.charAt(Math.floor(Math.random() * (letters.length-1) + 1));
+                            password += randomLetter;
+                        }
+                    }
+                    //NUMBERS ONLY
+                    else if (numOnly == true){
+                        for (var i=0; i<desiredLength; i++){
+                            var randomNumber = numbers.charAt(Math.floor(Math.random() * (numbers.length-1) + 1));
+                            password += randomNumber;
+                        }
+                    }
+                    //SYMBOLS ONLY
+                    else if (symOnly == true){
+                        for (var i=0; i<desiredLength; i++){
+                            var randomSymbol = symbols.charAt(Math.floor(Math.random() * (symbols.length-1) + 1));
+                            password += randomSymbol;
+                        }
+                    }
+                    //LETTERS AND NUMBERS
+                    else if (letNum == true){
+                        for (var i=0; i<desiredLength; i++){
+                            var whichOne = Math.floor(Math.random() * (2-0) + 0);
+                            if (whichOne == 1){
+                                var randomLetter = letters.charAt(Math.floor(Math.random() * (letters.length-1) + 1));
+                                password += randomLetter;
+                            }
+                            else {
+                                var randomNumber = numbers.charAt(Math.floor(Math.random() * (numbers.length-1) + 1));
+                                password += randomNumber;
+                            }
+                        }
+                    } 
+                    //LETTERS AND SYMBOLS
+                    else if (letSym == true){
+                        for (var i=0; i<desiredLength; i++){
+                            var whichOne = Math.floor(Math.random() * (2-0) + 0);
+                            if (whichOne == 1){
+                                var randomLetter = letters.charAt(Math.floor(Math.random() * (letters.length-1) + 1));
+                                password += randomLetter;
+                            }
+                            else {
+                                var randomSymbol = symbols.charAt(Math.floor(Math.random() * (symbols.length-1) + 1));
+                                password += randomSymbol;
+                            }
+                        }
+                    }
+                    //NUMBERS AND SYMBOLS
+                    else if (numSym == true){
+                        for (var i=0; i<desiredLength; i++){
+                            var whichOne = Math.floor(Math.random() * (2-0) + 0);
+                            if (whichOne == 1){
+                                var randomNumber = numbers.charAt(Math.floor(Math.random() * (numbers.length-1) + 1));
+                                password += randomNumber;
+                            }
+                            else {
+                                var randomSymbol = symbols.charAt(Math.floor(Math.random() * (symbols.length-1) + 1));
+                                password += randomSymbol;
+                            }
+                        }
+                    }
+                    console.log(password);
+                    document.getElementById("passwordField").innerHTML = password;
+                }           
+
+            </script>
+            
+        </div>
+    </body>
+</html>
